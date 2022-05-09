@@ -7,3 +7,5 @@ tar -xvf exercism-3.0.13-linux-x86_64.tar.gz
 mkdir -p $HOME/bin
 cp exercism $HOME/bin
 $HOME/bin/exercism version
+cd ..
+rm -rf exercism-cli

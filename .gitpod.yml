@@ -1,6 +1,6 @@
 tasks:
-  - before: sh ./exercism-setup.sh      
-    init: PATH=$HOME/bin:$PATH
+  - before: PATH=$HOME/bin:$PATH      
+    init: sh ./exercism-setup.sh
     command: exercism configure --workspace=./exercism --token=$EXERCISM_TOKEN
 
 image: gitpod/workspace-rust
