@@ -3,8 +3,7 @@ tasks:
     init: PATH=$HOME/bin:$PATH
     command: exercism configure --workspace=./exercism --token=$EXERCISM_TOKEN
 
-image:
-  file: gitpod/workspace-rust
+image: gitpod/workspace-rust
 
 vscode:
   extensions:
