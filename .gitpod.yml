@@ -1,5 +1,5 @@
 tasks:
-  - command: exercism configure --workspace=./exercism --token=$EXERCISM_TOKEN
+  - command: ./exercism-setup.sh -t $EXERCISM_TOKEN
 
 image: banucalin/exercism-gitpod-env:latest
 
