@@ -1,7 +1,7 @@
 tasks:
   - command: ./exercism-setup.sh -t $EXERCISM_TOKEN
 
-image: banucalin/exercism-gitpod-env:latest
+image: .gitpod.Dockerfile
 
 vscode:
   extensions:
