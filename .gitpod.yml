@@ -1,5 +1,5 @@
 tasks:
-  - command: ./exercism-setup.sh -t $EXERCISM_TOKEN
+  - command: ./exercism-setup.sh --configure $EXERCISM_TOKEN
 
 image: .gitpod.Dockerfile
 

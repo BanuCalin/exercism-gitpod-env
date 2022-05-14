@@ -11,33 +11,33 @@ function clean_exercise {
 function setup_exercise {
     clean_exercise
 
-    mkdir exercism-workspace
-    exercism configure -w ./exercism-workspace
-
     echo "Downloading exercise: $1 from exercism..."
     EX_PATH=$(exercism download --exercise=$1 --track=rust 2> /dev/null)
 
-    mv exercism-workspace/rust/*/Cargo.toml .
-    mv exercism-workspace/rust/*/src .
-    mv exercism-workspace/rust/*/tests .
-    mv exercism-workspace/rust/*/.exercism .
+    ln -s exercism-workspace/rust/*/Cargo.toml Cargo.toml
+    ln -s exercism-workspace/rust/*/src src
+    ln -s exercism-workspace/rust/*/tests tests
+    ln -s exercism-workspace/rust/*/.exercism .exercism
     mkdir doc
-    mv exercism-workspace/rust/*/HELP.md doc/
-    mv exercism-workspace/rust/*/README.md doc/
-
-    rm -rf exercism-workspace
+    ln -s exercism-workspace/rust/*/HELP.md doc/HELP.md
+    ln -s exercism-workspace/rust/*/README.md doc/README.md
 }
 
 function submit_exercise {
     exercism submit src/*.rs Cargo.toml
 }
 
-function configure_token {
-    exercism configure --token=$1
+function configure_workspace {
+    clean_exercise
+
+    rm -rf exercism-workspace
+    mkdir exercism-workspace
+
+    exercism configure --token $1 --workspace ./exercism-workspace
 }
 
 function parse_args {
-    OPTS=`getopt -o hct:e:s: --long help,token:clean,exercise:,submit: -n 'exercism-setup' -- "$@"`
+    OPTS=`getopt -o hc:Ce:s --long help,configure:,clean,exercise:,submit -n 'exercism-setup' -- "$@"`
 
     eval set -- "$OPTS"
 
@@ -49,10 +49,10 @@ function parse_args {
     while true; do
         case "$1" in
                 -h | --help) usage; exit;;
-                -t | --token) configure_token $2; exit;;
-                -c | --clean) clean_exercise; exit;;
+                -c | --configure) configure_workspace $2; exit;;
+                -C | --clean) clean_exercise; exit;;
                 -e | --exercise) setup_exercise $2; shift; shift;;
-                -s | --submit) submit_exercise $2; shift; shift;;
+                -s | --submit) submit_exercise; shift; shift;;
             --) shift; break;;
             *) break;;
         esac
