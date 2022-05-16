@@ -1,7 +1,8 @@
 tasks:
   - command: ./exercism-setup.sh --configure $EXERCISM_TOKEN
 
-image: .gitpod.Dockerfile
+image:
+  file: .gitpod.Dockerfile
 
 vscode:
   extensions:
