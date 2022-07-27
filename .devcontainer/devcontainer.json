@@ -3,7 +3,7 @@
 {
 	"name": "Rust",
 	"build": {
-		"dockerfile": "Dockerfile",
+		"dockerfile": "../.gitpod.Dockerfile"
 	},
 	"runArgs": [
 		"--cap-add=SYS_PTRACE",
@@ -28,17 +28,15 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"vadimcn.vscode-lldb",
-		"mutantdino.resourcemonitor",
 		"rust-lang.rust-analyzer",
 		"tamasfe.even-better-toml",
 		"serayuzgur.crates",
-		"ryanluker.coverage-gutters",
 		"wayou.vscode-todo-highlight",
 		"mhutchie.git-graph",
 	],
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "rustc --version",
+	"postCreateCommand": "sudo mkdir /workspace; sudo ln -s /home/gitpod/.cargo /workspace/.cargo",
 	// Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"containerUser": "gitpod",
+	"remoteUser": "gitpod"
 }
